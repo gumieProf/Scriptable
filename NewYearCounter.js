@@ -25,7 +25,6 @@ SOFTWARE.
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: yellow; icon-glyph: calendar-alt;
-const bg = new Color("#8e8e92");
 const textColor = new Color("#ffffff");
 var days;
 var isNewYear;
@@ -70,18 +69,21 @@ if (isNewYear) {
   txt1.textColor = textColor;
   txtStack.addSpacer();
 
-  const textStack2 = widget.addStack();
-  const text2 = textStack2.addText("New Year");
-
   const txtStack2 = widget.addStack();
-  txtStack2.centerAlignContent();
+  const txt2 = txtStack2.addText("New Year");
 
-  const txt2 = txtStack2.addText(String(days) + "日");
-  txt2.font = Font.systemFont(50);
-  txt2.textColor = textColor;
+  const txtStack3 = widget.addStack();
+  const txt3 = txtStack3.addText(String(days));
+  txt3.font = Font.systemFont(50);
+  txt3.textColor = textColor;
   txtStack.addSpacer();
 
-  widget.backgroundColor = bg;
+  const txtStack4 = widget.addStack();
+  const txt4 = txtStack4.addText("Day");
+  txt4.font = Font.systemFont(16);
+  txt4.textColor = textColor;
+
+  widget.backgroundColor = new Color("#8e8e92");
 }
 Script.setWidget(widget);
 widget.presentSmall();
