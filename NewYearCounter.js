@@ -20,6 +20,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 */
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
@@ -27,7 +28,7 @@ SOFTWARE.
 const bg = new Color("#8e8e92");
 const textColor = new Color("#ffffff");
 var days;
-
+var isNewYear;
 const time = new Date();
 const thisYear = time.getFullYear();
 const nextYear = thisYear + 1;
@@ -36,26 +37,51 @@ function countDown() {
   const _time = Number(new Date());
   const diff = NewYearTime - _time;
   days = Math.floor(diff / 1000 / 60 / 60 / 24) + 1;
+  if ((days === 365) | (days === 366)) {
+    isNewYear = true;
+  }
 }
 countDown();
+
 let widget = new ListWidget();
 widget.addSpacer(10);
 const txtStack = widget.addStack();
 txtStack.centerAlignContent();
+if (isNewYear) {
+  const txt1 = txtStack.addText("Happy");
+  txt1.font = Font.systemFont(30);
+  txt1.textColor = textColor;
+  txtStack.addSpacer();
 
-const txt1 = txtStack.addText("来年まで");
-txt1.font = Font.systemFont(16);
-txt1.textColor = textColor;
-txtStack.addSpacer();
+  const txtStack2 = widget.addStack();
+  const txt2 = txtStack2.addText("New");
+  txt2.font = Font.systemFont(30);
+  txt2.textColor = textColor;
+  txtStack2.addSpacer();
 
-const txtStack2 = widget.addStack();
-txtStack.centerAlignContent();
+  const txtStack3 = widget.addStack();
+  const txt3 = txtStack3.addText("Year!");
+  txt3.font = Font.systemFont(30);
+  txt3.textColor = textColor;
+  widget.backgroundColor = new Color("#fe3b2f");
+} else {
+  const txt1 = txtStack.addText("Until the");
+  txt1.font = Font.systemFont(16);
+  txt1.textColor = textColor;
+  txtStack.addSpacer();
 
-const txt2 = txtStack2.addText(String(days) + "日");
-txt2.font = Font.systemFont(50);
-txt2.textColor = textColor;
-txtStack.addSpacer();
+  const textStack2 = widget.addStack();
+  const text2 = textStack2.addText("New Year");
 
-widget.backgroundColor = bg;
+  const txtStack2 = widget.addStack();
+  txtStack2.centerAlignContent();
+
+  const txt2 = txtStack2.addText(String(days) + "日");
+  txt2.font = Font.systemFont(50);
+  txt2.textColor = textColor;
+  txtStack.addSpacer();
+
+  widget.backgroundColor = bg;
+}
 Script.setWidget(widget);
 widget.presentSmall();
