@@ -1,4 +1,5 @@
-/*MIT License
+/*
+MIT License
 
 Copyright (c) 2025 gumieProf
 
@@ -44,7 +45,7 @@ txtStack.centerAlignContent();
 
 const txt1 = txtStack.addText("来年まで");
 txt1.font = Font.systemFont(16);
-txt1.color = textColor;
+txt1.textColor = textColor;
 txtStack.addSpacer();
 
 const txtStack2 = widget.addStack();
@@ -52,7 +53,7 @@ txtStack.centerAlignContent();
 
 const txt2 = txtStack2.addText(String(days) + "日");
 txt2.font = Font.systemFont(50);
-txt2.color = textColor;
+txt2.textColor = textColor;
 txtStack.addSpacer();
 
 widget.backgroundColor = bg;
