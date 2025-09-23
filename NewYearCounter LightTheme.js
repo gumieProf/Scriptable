@@ -1,3 +1,6 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: pink; icon-glyph: magic;
 /*
 MIT License
 
@@ -22,12 +25,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-// Variables used by Scriptable.
-// These must be at the very top of the file. Do not edit.
-// icon-color: yellow; icon-glyph: calendar-alt;
-const textColor = new Color("#ffffff");
+const textColor = new Color("#1A1A1A");
 var days;
 var isNewYear;
+var isHarfYear
 const time = new Date();
 const thisYear = time.getFullYear();
 const nextYear = thisYear + 1;
@@ -35,18 +36,42 @@ const NewYearTime = new Date(`January 01 ${nextYear} 00:00:00`);
 function countDown() {
   const _time = Number(new Date());
   const diff = NewYearTime - _time;
-  days = Math.floor(diff / 1000 / 60 / 60 / 24) + 1;
-  if ((days === 365) | (days === 366)) {
+days = Math.floor(diff / 1000 / 60 / 60 / 24) + 1;
+  if(days===182){
+    isHarfYear = true
+  }
+  if (days === 365 || days === 366) {
     isNewYear = true;
   }
 }
 countDown();
 
 let widget = new ListWidget();
-widget.addSpacer(10);
 const txtStack = widget.addStack();
 txtStack.centerAlignContent();
-if (isNewYear) {
+if(isHarfYear){
+  const txt1 = txtStack.addText("Until the");
+  txt1.font = Font.systemFont(16);
+  txt1.textColor = textColor;
+  txtStack.addSpacer();
+
+  const txtStack2 = widget.addStack();
+  const txt2 = txtStack2.addText("New Year");
+  txt2.textColor=textColor
+
+  const txtStack3 = widget.addStack();
+  const txt3 = txtStack3.addText("1/2");
+  txt3.font = Font.systemFont(70);
+  txt3.textColor = textColor;
+  txtStack.addSpacer();
+
+  const txtStack4 = widget.addStack();
+  const txt4 = txtStack4.addText("Year");
+  txt4.font = Font.systemFont(16);
+  txt4.textColor = textColor;
+
+  widget.backgroundColor = new Color("#8e8e92");
+} else if (isNewYear) {
   const txt1 = txtStack.addText("Happy");
   txt1.font = Font.systemFont(30);
   txt1.textColor = textColor;
@@ -71,6 +96,7 @@ if (isNewYear) {
 
   const txtStack2 = widget.addStack();
   const txt2 = txtStack2.addText("New Year");
+  txt2.textColor=textColor
 
   const txtStack3 = widget.addStack();
   const txt3 = txtStack3.addText(String(days));
@@ -79,11 +105,11 @@ if (isNewYear) {
   txtStack.addSpacer();
 
   const txtStack4 = widget.addStack();
-  const txt4 = txtStack4.addText("Day");
+  const txt4 = txtStack4.addText("Days");
   txt4.font = Font.systemFont(16);
   txt4.textColor = textColor;
 
-  widget.backgroundColor = new Color("#8e8e92");
+  widget.backgroundColor = new Color("#EFEDED");
 }
 Script.setWidget(widget);
 widget.presentSmall();
