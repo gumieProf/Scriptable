@@ -30,31 +30,47 @@ const white = new Color("#f1f1f1");
 const black = new Color("#0f0f0f");
 var days;
 var isNewYear;
-var isHarfYear
-var text = Color.dynamic(black, white)
-var bg = Color.dynamic(white, black)
-var red =  Color.dynamic(new Color("#fe3b2f"), new Color("#ad0b03"))
+var isHarfYear;
+var text = Color.dynamic(black, white);
+var bg = Color.dynamic(white, black);
+var red = Color.dynamic(new Color("#fe3b2f"), new Color("#ad0b03"));
 var red;
 const time = new Date();
 const thisYear = time.getFullYear();
 const nextYear = thisYear + 1;
 const NewYearTime = new Date(`January 01 ${nextYear} 00:00:00`);
+function IsLeapYear(year) {
+  if (
+    Number.isInteger(year / 4) &
+    (!Number.isInteger(year / 100) | Number.isInteger(year / 400))
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
 function countDown() {
   const _time = Number(new Date());
   const diff = NewYearTime - _time;
-days = Math.floor(diff / 1000 / 60 / 60 / 24) + 1;
-  if(days===182){
-    isHarfYear = true
+  days = Math.floor(diff / 1000 / 60 / 60 / 24) + 1;
+  if (days === 182) {
+    isHarfYear = true;
   }
-  if (days === 365 || days === 366) {
-    isNewYear = true;
+  if (IsLeapYear(thisYear)) {
+    if (days === 366) {
+      isNewYear = true;
+    }
+  } else {
+    if (days === 365) {
+      isNewYear = true;
+    }
   }
 }
 countDown();
 let widget = new ListWidget();
 const txtStack = widget.addStack();
 txtStack.centerAlignContent();
-if(isHarfYear){
+if (isHarfYear) {
   const txt1 = txtStack.addText("Until the");
   txt1.font = Font.systemFont(16);
   txt1.textColor = white;
@@ -62,7 +78,7 @@ if(isHarfYear){
 
   const txtStack2 = widget.addStack();
   const txt2 = txtStack2.addText("New Year");
-  txt2.textColor=white
+  txt2.textColor = white;
 
   const txtStack3 = widget.addStack();
   const txt3 = txtStack3.addText("1/2");
@@ -85,13 +101,13 @@ if(isHarfYear){
   const txtStack2 = widget.addStack();
   const txt2 = txtStack2.addText("New");
   txt2.font = Font.systemFont(30);
-  txt2.textColor = text ;
+  txt2.textColor = text;
   txtStack2.addSpacer();
 
   const txtStack3 = widget.addStack();
   const txt3 = txtStack3.addText("Year!");
   txt3.font = Font.systemFont(30);
-  txt3.textColor =  text;
+  txt3.textColor = text;
   widget.backgroundColor = new Color("#fe3b2f");
 } else {
   const txt1 = txtStack.addText("Until the");
@@ -101,7 +117,7 @@ if(isHarfYear){
 
   const txtStack2 = widget.addStack();
   const txt2 = txtStack2.addText("New Year");
-  txt2.textColor=text
+  txt2.textColor = text;
 
   const txtStack3 = widget.addStack();
   const txt3 = txtStack3.addText(String(days));
@@ -114,7 +130,7 @@ if(isHarfYear){
   txt4.font = Font.systemFont(16);
   txt4.textColor = text;
 
-  widget.backgroundColor = bg
+  widget.backgroundColor = bg;
 }
 Script.setWidget(widget);
 widget.presentSmall();
