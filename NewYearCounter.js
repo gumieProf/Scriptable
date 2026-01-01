@@ -34,7 +34,6 @@ var isHarfYear;
 var text = Color.dynamic(black, white);
 var bg = Color.dynamic(white, black);
 var red = Color.dynamic(new Color("#fe3b2f"), new Color("#ad0b03"));
-var red;
 const time = new Date();
 const thisYear = time.getFullYear();
 const nextYear = thisYear + 1;
@@ -93,22 +92,23 @@ if (isHarfYear) {
 
   widget.backgroundColor = new Color("#8e8e92");
 } else if (isNewYear) {
+  var text2 = new Color("#ffffff");
   const txt1 = txtStack.addText("Happy");
   txt1.font = Font.systemFont(30);
-  txt1.textColor = text;
+  txt1.textColor = text2;
   txtStack.addSpacer();
 
   const txtStack2 = widget.addStack();
   const txt2 = txtStack2.addText("New");
   txt2.font = Font.systemFont(30);
-  txt2.textColor = text;
+  txt2.textColor = text2;
   txtStack2.addSpacer();
 
   const txtStack3 = widget.addStack();
   const txt3 = txtStack3.addText("Year!");
   txt3.font = Font.systemFont(30);
-  txt3.textColor = text;
-  widget.backgroundColor = new Color("#fe3b2f");
+  txt3.textColor = text2;
+  widget.backgroundColor = red;
 } else {
   const txt1 = txtStack.addText("Until the");
   txt1.font = Font.systemFont(16);
